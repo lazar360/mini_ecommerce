@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+ {% block main %}
+     <!-- GESTION DU PANIER -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+     <!-- BREADCRUMB -->
+     <div id="breadcrumb" class="section">
+         <!-- container -->
+         <div class="container">
+             <!-- row -->
+             <div class="row">
+                 <div class="col-md-12">
+                     <div class="text-center">
+                     <h3 class="breadcrumb-header">Votre panier</h3>
+                     </div>
+                 </div>
+             </div>
+             <!-- /row -->
+         </div>
+         <!-- /container -->
+     </div>
+     <!-- /BREADCRUMB -->
+
+     <!-- SECTION -->
+     <div class="section">
+         <!-- container -->
+         <div class="container">
+             <!-- row -->
+             <div class="row">
+
+                 <table class="table">
+                     <thead>
+                     <tr>
+                         <th>Produit</th>
+                         <th>Prix</th>
+                         <th>Quantité</th>
+                         <th>Total</th>
+                         <th>Actions</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                        {% for element in dataPanier %}
+                            <tr>
+                                <td>{{ element.produit.name }}</td>
+                                <td>{{ element.produit.price }} €</td>
+                                <td>{{ element.quantite }}</td>
+                                <td>{{ element.quantite * element.produit.price}} €</td>
+                                <td>
+                                    <a  href="{{ path("cart_add", {id:element.produit.id}) }}" class="btn btn-success">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="{{ path("cart_remove", {id:element.produit.id}) }}" class="btn btn-warning">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="{{ path("cart_delete", {id:element.produit.id}) }}" class="btn btn-danger">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                        </svg>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">Votre panier est vide</td>
+                            </tr>
+                        {% endfor %}
+
+                     </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">Total</td>
+                                    <td>{{ total }}</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                 </table>
+             </div>
+             <a  href="{{ path("cart_add_order") }}" class="btn btn-success">COMMANDER</a>
+
+
+             <!-- /row -->
+         </div>
+         <!-- /container -->
+     </div>
+     <!-- /SECTION -->
+   </section>
+
+     <!-- GESTION DES COMMANDES -->
+     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+     <!-- /BREADCRUMB -->
+
+     <div id="breadcrumb" class="section">
+         <!-- container -->
+         <div class="container">
+             <!-- row -->
+             <div class="row">
+                 <div class="col-md-12">
+                     <div class="text-center">
+                         <h3 class="breadcrumb-header">Vos commandes</h3>
+                     </div>
+                 </div>
+             </div>
+             <!-- /row -->
+         </div>
+         <!-- /container -->
+     </div>
+     <!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Date de la commande</th>
+                    <th>Montant de la commande</th>
+                    <th>Statut de la commande</th>
+                </tr>
+                </thead>
+                <tr>
+                    {% for element in orders %}
+
+                    <td>{{ element.orderDate | date ("m/d/Y H:i:s")}} </td>
+                    <td>{{ element.price }} €</td>
+                    <td>{{ element.status }}</td>
+                </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">Vous n'avez pas de commande en cours</td>
+                    </tr>
+                {% endfor %}
+                <tbody>
+                </tbody>
+            </table>
+
+ {% endblock %}

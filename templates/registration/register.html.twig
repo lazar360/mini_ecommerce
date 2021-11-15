@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block main %}
+
+<h1 style="margin-top: 5%" class="text-center"><em>Enregistrer un nouvel utilisateur</em></h1>
+
+<div class="text-center">
+
+{{ form_start(registrationForm) }}
+
+    <div class="group p-1">
+        {{ form_label(registrationForm.firstname) }}
+        <div class="form-control">
+        {{ form_widget(registrationForm.firstname) }}
+        </div>
+        {{ form_errors(registrationForm.firstname) }}
+    </div>
+
+    <div class="group p-1">
+        {{ form_label(registrationForm.lastname) }}
+        <div class="form-control">
+        {{ form_widget(registrationForm.lastname) }}
+        </div>
+        {{ form_errors(registrationForm.lastname) }}
+    </div>
+
+
+    <div class="group p-1">
+        {{ form_label(registrationForm.login) }}
+        <div class="form-control">
+            {{ form_widget(registrationForm.login) }}
+        </div>
+        {{ form_errors(registrationForm.login) }}
+    </div>
+
+    <div class="group p-1">
+        {{ form_label(registrationForm.plainPassword) }}
+        <div class="form-control">
+            {{ form_widget(registrationForm.plainPassword) }}
+        </div>
+        {{ form_errors(registrationForm.plainPassword) }}
+    </div>
+
+        {#{{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}#}
+        {{ form_row(registrationForm.agreeTerms) }}
+    </div>
+    <div class="text-center">
+
+        <button style="margin-bottom: 8%" type="submit" class="btn btn-lg btn-primary">S'enregistrer</button>
+    {{ form_end(registrationForm) }}
+    </div>
+</div>
+{% endblock %}
