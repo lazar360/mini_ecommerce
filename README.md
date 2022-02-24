@@ -13,7 +13,7 @@ Mini e-commerce website built with symfony 5 in 4 days.
 
 <h2>Demo</h2>
 
-
+![miniecomdemo](https://user-images.githubusercontent.com/91179295/155603672-6d6127af-0fbb-4206-8a5d-b9a6c382128b.gif)
 
 <h2>Features</h2>
 The application displays a mini virtual electronic store that contains virtual products at best prices.
